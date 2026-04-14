@@ -1,0 +1,20 @@
+<head>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<div class="container">
+  <h1>Task Hive - by Er Pushp</h1>
+  <% if (currentUser) { %>
+    <h3 style="text-align: center;">Welcome to <%= currentUser.username %>'s Task Hive</h3>
+     <% } %>
+     <nav>
+        
+      <a href="/">Home</a>
+  <% if (currentUser) { %>
+   
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+  <% } %>
+</nav>
+</div>

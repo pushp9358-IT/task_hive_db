@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Task</title>
+  <link rel="stylesheet" href="/css/style.css">
+
+    <style>
+        /* 🔥 hide update form initially */
+        #updateForm {
+            display: none;
+            margin-top: 10px;
+        }
+    </style>
+        
+   <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
+</head>
+<body>
+  
+
+
+<div class="container">
+      <% if (currentUser) { %>
+    <h3 style="text-align: center;">Welcome to <%= currentUser.username %>'s Task Hive</h3>
+     <% } %>
+     <nav>
+        
+      <a href="/">Home</a>
+  <% if (currentUser) { %>
+   
+    <a href="/logout">Logout</a>
+  <% } else { %>
+    <a href="/login">Login</a>
+    <a href="/signup">Signup</a>
+  <% } %>
+</nav>
+<!--  Error message -->
+ <% if (error) { %>
+  <p style="color:red;"><%= error %></p>
+<% } %>
+<br/>
+    <form action="/add" method="POST" id="addForm">
+        <input type="text" name="list" placeholder="Enter the task"/>
+        <button type="submit">Submit</button>
+    </form>
+
+    <!-- ✅ UPDATE TASK (HIDDEN) -->
+    <form id="updateForm" method="POST">
+        <input type="hidden" id="updateId" name="id">
+        <input type="text" name="list" id="update" placeholder="Edit task"><br/><br/>
+        <button type="submit">Update</button>
+        <button type="button" onclick="cancelEdit()">Cancel</button>
+    </form>
+
+    <hr/>
+
+    <h1>To Do List</h1>
+
+    <div class="list-items">
+        <% if (lists && lists.length > 0) { %>
+            <ul>
+                <% lists.forEach((item) => { %>
+                    <li>
+                        <%= item.list %>
+
+                        <!-- ✅ EDIT BUTTON -->
+                        <button 
+                            type="button"
+                            onclick="editTask('<%= item._id %>', '<%= item.list %>')">
+                            Edit
+                        </button>
+
+                        <!-- ✅ DELETE -->
+                        <form 
+                            action="/add/<%= item._id %>?_method=DELETE" 
+                            method="POST" 
+                            style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } else { %>
+            <p>No tasks yet</p>
+        <% } %>
+    </div>
+
+    <!-- ✅ SCRIPT -->
+    <script>
+        function editTask(id, value) {
+             document.getElementById("addForm").style.display = "none";
+            const form = document.getElementById("updateForm");
+
+            // show update form
+            form.style.display = "block";
+
+
+            // fill values
+            document.getElementById("update").value = value;
+            document.getElementById("updateId").value = id;
+
+            // set dynamic action
+            form.action = `/add/${id}?_method=PUT`;
+        }
+
+        function cancelEdit() {
+            const form = document.getElementById("updateForm");
+
+            // hide form
+            form.style.display = "none";
+
+            // clear values
+            document.getElementById("update").value = "";
+            document.getElementById("updateId").value = "";
+        }
+
+        // auto hide after update
+        document.getElementById("updateForm").addEventListener("submit", function () {
+            this.style.display = "none";
+        });
+    </script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</div>
+</body>
+</html>

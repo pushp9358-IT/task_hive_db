@@ -1,0 +1,131 @@
+/* 🌍 Reset + Base */
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  margin: 0;
+  padding: 0;
+}
+
+/* 📦 Container */
+.container {
+  width: 400px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+/* 🏷 Title */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* ✍️ Input */
+input {
+  width: 70%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
+}
+
+
+/* 🔘 Buttons */
+button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: 0.2s;
+}
+
+/* ➕ Add button */
+form[action="/add"] button {
+  background: #28a745;
+  color: white;
+}
+
+form[action="/add"] button:hover {
+  background: #218838;
+}
+
+/* ✏️ Update button */
+#updateForm button[type="submit"] {
+  background: #007bff;
+  color: white;
+}
+
+#updateForm button[type="submit"]:hover {
+  background: #0056b3;
+}
+
+/* ❌ Cancel button */
+#updateForm button[type="button"] {
+  background: #6c757d;
+  color: white;
+}
+
+#updateForm button[type="button"]:hover {
+  background: #5a6268;
+}
+
+/* 📋 List */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* 📌 List item */
+li {
+  background: #f9f9f9;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🎯 Action buttons */
+li button {
+  margin-left: 5px;
+}
+
+/* ✏️ Edit */
+li button:first-child {
+  background: #ffc107;
+}
+
+li button:first-child:hover {
+  background: #e0a800;
+}
+
+/* 🗑 Delete */
+li form button {
+  background: #dc3545;
+  color: white;
+}
+
+li form button:hover {
+  background: #c82333;
+}
+
+/* 🔝 Navbar */
+nav {
+  background: #343a40;
+  padding: 10px;
+  text-align: center;
+}
+
+nav a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
