@@ -49,7 +49,7 @@ async function startServer() {
   try {
     
     // 1. CONNECT DB
-    console.log("DB URL:", dbUrl);
+    
     await mongoose.connect(dbUrl);
     console.log("connected to DB");
   }catch (err) {
