@@ -5,6 +5,10 @@ const Schema = mongoose.Schema;
 const listSchema = new Schema({
  
   list: String,
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User"
+  }
   
 });
 
