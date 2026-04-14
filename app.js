@@ -13,6 +13,7 @@ const methodOverride = require("method-override"); // to use delete and put meth
 const User = require('./models/user');
 const flash = require("connect-flash");
 const dbUrl = process.env.MONGO_URL;
+const PORT = process.env.PORT || 3000;
 
 
 app.use(express.urlencoded({ extended: true })); // to access req.body// body parser  
