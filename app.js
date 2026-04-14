@@ -50,7 +50,7 @@ async function startServer() {
   try {
     
     // 1. CONNECT DB
-    
+
     await mongoose.connect(dbUrl);
     console.log("connected to DB");
   }catch (err) {
@@ -149,7 +149,10 @@ app.get("/logout", (req, res, next) => {
 // to add new task
 
 app.post('/add', isLoggedIn, async(req, res) => {
-  const newList = new List(req.body);
+  const newList = new List({
+    list: req.body.list,
+    user: req.user._id   // important
+  });
   await newList.save();
   res.redirect('/add');
 
@@ -158,8 +161,8 @@ app.post('/add', isLoggedIn, async(req, res) => {
 
 //to show the task
 
-app.get('/add', async(req,res) => {
-  const lists = await List.find();
+app.get('/add', isLoggedIn, async(req,res) => {
+  const lists = await List.find({ user: req.user._id });
   res.render("list/add", {lists});
 });
 
